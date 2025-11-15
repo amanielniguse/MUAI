@@ -1,0 +1,2039 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0">
+    <title>Amaniel Niguse</title>
+    <!-- Load Tailwind CSS -->
+    <script src="cdn.tailwindcss.com"></script>
+    
+    <!-- Load Poppins font (Requested) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX CSS for LaTeX Rendering - SRI ATTRIBUTES REMOVED TO FIX LOADING ERROR -->
+    <link rel="stylesheet" href="katex.min.css">
+    <!-- KaTeX JavaScript Libraries - SRI ATTRIBUTES REMOVED TO FIX LOADING ERROR -->
+    <script defer src="katex.min.js"></script>
+    <script defer src="auto-render.min.js"></script>
+
+
+    <style>
+        /* BASE STYLES */
+        body { 
+            font-family: 'Poppins', sans-serif; /* Poppins font applied */
+            transition: background-color 0.5s ease;
+            /* Target Desktop Sizing (approx. 25% decrease) */
+            font-size: 0.9rem; 
+        }
+
+        /* Base Glassmorphism Effect */
+        .glass {
+            backdrop-filter: blur(20px); /* Increased base blur for better effect */
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        /* User Bubble - Should be colored, not purely glass, but needs shadow for depth */
+        .user-bubble-effect {
+            box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.35); /* Stronger shadow */
+        }
+
+        /* Model Bubble - Base Glass */
+        .model-bubble {
+            background: rgba(255, 255, 255, 0.2) !important; 
+            border-color: rgba(255, 255, 255, 0.4) !important;
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.5) !important;
+            width: 100%; /* UI ADJUSTMENT: Make model bubble full width */
+        }
+        
+        /* --- THEME DEFINITIONS --- */
+
+/* --- PURPLE TO CYAN NEOMORPHIC THEME --- */
+.theme-neolight { 
+    /* Gradient background */
+    background: linear-gradient(135deg, #8e44ad, #00ffff);
+    color: #ffffff; /* base text color on gradient */
+}
+
+/* Glass / Card Container */
+.theme-neolight .glass {
+    background: rgba(255,255,255,0.1); /* semi-transparent glass */
+    border-radius: 12px;
+    box-shadow: 8px 8px 16px rgba(0,0,0,0.25),  /* dark shadow */
+                -8px -8px 16px rgba(255,255,255,0.2); /* soft highlight */
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+/* Sidebar */
+.theme-neolight .glass-sidebar {
+    background: rgba(255,255,255,0.15);
+    border-radius: 0 0.75rem 0.75rem 0;
+    box-shadow: 8px 8px 16px rgba(0,0,0,0.2),
+                -8px -8px 16px rgba(255,255,255,0.15);
+}
+
+/* Primary Button - Raised */
+.theme-neolight .bg-primary {
+    background: rgba(255,255,255,0.15);
+    color: #ffffff;
+    border-radius: 16px;
+    border: none;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    box-shadow: 6px 6px 12px rgba(0,0,0,0.25),
+                -6px -6px 12px rgba(255,255,255,0.2);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+/* Button Hover / Pressed Effect */
+.theme-neolight .bg-primary:hover {
+    box-shadow: inset 4px 4px 8px rgba(0,0,0,0.25),
+                inset -4px -4px 8px rgba(255,255,255,0.2);
+}
+
+/* User Bubble - Raised */
+.theme-neolight .user-bubble {
+    background: rgba(255,255,255,0.2);
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    box-shadow: 6px 6px 12px rgba(0,0,0,0.25),
+                -6px -6px 12px rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+}
+
+/* Model Bubble - Concave / Pressed */
+.theme-neolight .model-bubble {
+    background: rgba(255,255,255,0.15);
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    box-shadow: inset 6px 6px 12px rgba(0,0,0,0.25),
+                inset -6px -6px 12px rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+}
+
+/* Input Fields - Concave / Pressed */
+.theme-neolight .input-opaque {
+    background: rgba(255,255,255,0.15);
+    border-radius: 9999px;
+    padding: 0.5rem 1rem;
+    box-shadow: inset 6px 6px 12px rgba(0,0,0,0.25),
+                inset -6px -6px 12px rgba(255,255,255,0.2);
+    color: #ffffff;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+/* Active Conversation Highlight */
+.theme-neolight .conversation-active {
+    background: rgba(255,255,255,0.25) !important; 
+    color: #ffffff !important;
+    box-shadow: 6px 6px 12px rgba(0,0,0,0.25),
+                -6px -6px 12px rgba(255,255,255,0.2);
+}
+        /* 2. VIBRANT Theme */
+        .theme-vibrant { background: linear-gradient(135deg, #6C5CE7, #81D4FA); color: #ffffff; }
+        .theme-vibrant .glass { background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.2); color: #ffffff; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); }
+        .theme-vibrant .glass-sidebar { background: rgba(0, 0, 0, 0.3); border-radius: 0 0.75rem 0.75rem 0; }
+        .theme-vibrant .text-primary { color: #A4B0BE; }
+        .theme-vibrant .text-secondary { color: #BDBDBD; }
+        .theme-vibrant .bg-primary { background-color: #6C5CE7; } 
+        .theme-vibrant .bg-primary:hover { background-color: #5B4EC9; }
+        .theme-vibrant .user-bubble { background-color: #5558d1; color: white; }
+        .theme-vibrant .ai-icon { background-color: #81D4FA; }
+        .theme-vibrant .user-icon { background-color: #A4B0BE; }
+        .theme-vibrant .conversation-active { background-color: #6C5CE7 !important; color: white !important; }
+        .theme-vibrant .placeholder-gray-400::placeholder { color: #A4B0BE; }
+        .theme-vibrant .model-bubble { background: rgba(255, 255, 255, 0.1) !important; border-color: rgba(255, 255, 255, 0.2) !important; box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 0.7) !important; }
+        .theme-vibrant .input-opaque { background-color: #6C5CE7; } /* Opaque Input BG */
+
+
+/* Dark Neo Base */
+.theme-neodark{
+    background: #1c1c1e; /* perfect dark neomorphic base */
+    color: #e5e5e5;
+}
+
+/* Shadow variables */
+:root {
+    --neo-dark: rgba(0, 0, 0, 0.55);
+    --neo-light: rgba(255, 255, 255, 0.08);
+}
+
+/* Glass / Cards (Raised) */
+.theme-neodark.glass {
+    background: #1c1c1e;
+    border-radius: 12px;
+    box-shadow:
+        8px 8px 16px var(--neo-dark),
+       -8px -8px 16px var(--neo-light);
+    transition: 0.3s ease;
+}
+
+/* Sidebar (Raised) */
+.theme-neodark.glass-sidebar {
+    background: #1c1c1e;
+    border-radius: 0 0.75rem 0.75rem 0;
+    box-shadow:
+        10px 10px 20px var(--neo-dark),
+       -10px -10px 20px var(--neo-light);
+}
+
+/* Buttons (Raised) */
+.theme-neodark.bg-primary {
+    background: #1c1c1e;
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 0.6rem 1.4rem;
+    border: none;
+    font-weight: 600;
+    box-shadow:
+        6px 6px 12px var(--neo-dark),
+       -6px -6px 12px var(--neo-light);
+    transition: 0.2s ease;
+}
+
+.theme-neodark.bg-primary:hover {
+    box-shadow:
+        inset 5px 5px 10px var(--neo-dark),
+        inset -5px -5px 10px var(--neo-light);
+}
+
+/* User Bubble (Raised) */
+.theme-neodark.user-bubble {
+    background: #1c1c1e;
+    color: #f0f0f0;
+    border-radius: 20px;
+    padding: 0.55rem 1.1rem;
+    box-shadow:
+        6px 6px 12px var(--neo-dark),
+       -6px -6px 12px var(--neo-light);
+}
+
+/* Model Bubble (Pressed / Concave) */
+.theme-neodark.model-bubble {
+    background: #1c1c1e;
+    color: #eaeaea;
+    border-radius: 20px;
+    padding: 0.55rem 1.1rem;
+    box-shadow:
+        inset 6px 6px 12px var(--neo-dark),
+        inset -6px -6px 12px var(--neo-light);
+}
+
+/* Inputs (Concave) */
+.theme-neodark.input-opaque {
+    background: #1c1c1e;
+    border-radius: 9999px;
+    padding: 0.55rem 1.1rem;
+    color: #f0f0f0;
+    border: none;
+    box-shadow:
+        inset 6px 6px 12px var(--neo-dark),
+        inset -6px -6px 12px var(--neo-light);
+    transition: 0.3s ease;
+}
+
+/* Active conversation item */
+.theme-neodark.conversation-active {
+    background: #232325 !important;
+    color: #ffffff !important;
+    box-shadow:
+        6px 6px 12px var(--neo-dark),
+       -6px -6px 12px var(--neo-light);
+}
+        /* 4. MEKELLE UNIVERSITY Theme (Default - Green, Blue, White) */
+        .theme-mekelle { background: #002244; color: #ffffff; background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZzEiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwMDIyNDQiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDc2QkQiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2cxKSIvPjwvc3ZnPg=="); }
+        .theme-mekelle .glass { background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.4); color: #ffffff; box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.4); }
+        .theme-mekelle .glass-sidebar { border-radius: 0 0.75rem 0.75rem 0; }
+        .theme-mekelle .text-primary { color: #00A86B; } 
+        .theme-mekelle .text-secondary { color: #B0C4DE; } 
+        .theme-mekelle .bg-primary { background-color: #007FFF; color: #ffffff; } 
+        .theme-mekelle .bg-primary:hover { background-color: #006ED0; }
+        .theme-mekelle .user-bubble { background-color: #007FFF; color: #ffffff; } 
+        .theme-mekelle .ai-icon { background-color: #00A86B; color: #ffffff; } 
+        .theme-mekelle .user-icon { background-color: #007FFF; } 
+        .theme-mekelle .conversation-active { background-color: #00A86B !important; color: #ffffff !important; }
+        .theme-mekelle .model-bubble { background: rgba(255, 255, 255, 0.2) !important; border-color: rgba(255, 255, 255, 0.5) !important; }
+        .theme-mekelle .input-opaque { background-color: #007FFF; } /* Opaque Input BG */
+
+        /* 5. FUTURISTIC Theme */
+        .theme-futuristic { background: #101113; color: #00F0FF; background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZzIiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMxMDExMTMiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxMzMwMzMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2cyKSIvPjwvc3ZnPg=="); }
+        .theme-futuristic .glass { backdrop-filter: blur(30px); background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); color: #E0FFFF; }
+        .theme-futuristic .glass-sidebar { border-radius: 0 0.75rem 0.75rem 0; }
+        .theme-futuristic .text-primary { color: #00F0FF; } 
+        .theme-futuristic .bg-primary { background-color: #00F0FF; color: #101113; text-shadow: 0 0 5px #00F0FF; box-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
+        .theme-futuristic .user-bubble { background-color: #00F0FF; color: #101113; box-shadow: 0 0 10px rgba(0, 240, 255, 0.5) !important; }
+        .theme-futuristic .model-bubble { background: rgba(0, 240, 255, 0.03) !important; border-color: rgba(0, 240, 255, 0.15) !important; box-shadow: 0 0 10px rgba(0, 240, 255, 0.4) !important; }
+        .theme-futuristic .icon-ai-futuristic { stroke-dasharray: 60; animation: draw 2s linear infinite alternate; }
+        .theme-futuristic .input-opaque { background-color: #ffF0FF; } /* Opaque Input BG */
+
+
+        /* *** FINAL TABLE FORMATTING FIX (Pure CSS Overrides for Tables) *** */
+        .message-content table {
+            border-collapse: collapse !important;
+            width: max-content !important; 
+            margin: 1em 0 !important;
+            display: inline-block !important; 
+            overflow-x: auto !important;
+            color: inherit !important; 
+            font-size: 0.875rem; 
+            max-width: 100%; 
+        }
+        .message-content th, .message-content td {
+            border: 1px solid rgba(255, 255, 255, 0.4) !important; 
+            padding: 0.5rem 0.75rem !important;
+            text-align: left !important;
+            white-space: nowrap !important; 
+        }
+        .message-content th {
+            background-color: rgba(255, 255, 255, 0.2) !important; 
+            font-weight: 600 !important;
+        }
+
+
+        /* GENERAL MOBILE FIXES (Final Aggressive Overrides) */
+        @media (max-width: 768px) {
+            /* Critical fix: Ensure main chat area is always full viewport width */
+            .chat-main {
+                width: 100vw !important; 
+                min-width: 100vw;
+            }
+
+            /* Critical Fix 1: Scroll Depth and Stuffed Padding */
+            .chat-main main {
+                padding-bottom: 7rem !important; /* Aggressively increased padding-bottom to clear fixed footer */
+                padding-top: 5.5rem !important; /* Adjusted top padding to clear the header */
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
+            }
+
+            /* Critical Fix 2: Footer Fixed Position & Height */
+            .chat-main footer {
+                position: fixed; 
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                padding: 0.5rem !important; /* Reduced overall footer padding */
+                box-sizing: border-box; 
+                z-index: 30; 
+                /* Made transparent except for the input form */
+                background: transparent !important;
+                backdrop-filter: blur(0px) !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+
+            /* Critical Fix 3: Input Field Redesign */
+            .chat-main footer .max-w-4xl { max-width: 100%; margin: 0 auto; }
+            .chat-main footer form {
+                padding: 0.25rem !important; /* Reduced internal form padding */
+                border-radius: 9999px; /* Ensure full roundness */
+                align-items: center;
+                gap: 0.25rem; 
+                /* Opaque Background for the round input area (Override Footer Transparency) */
+                background: var(--input-opaque-bg-color, #fff) !important;
+                backdrop-filter: blur(0px) !important;
+            }
+            .chat-main footer #chat-input { padding: 0.5rem !important; font-size: 1rem; }
+
+            /* Critical Fix 4: Send Button Size/Position */
+            .chat-main footer #send-button { width: 2.25rem; height: 2.25rem; padding: 0.25rem; margin-left: 0rem; }
+            .chat-main footer #file-upload + label { padding: 0.5rem; }
+
+            /* Sidebar Mobile Hiding */
+            #sidebar { width: 85vw; max-width: 320px; position: fixed; height: 100vh; top: 0; left: 0; transition: transform 0.3s ease-in-out; z-index: 40; border-radius: 0 0.75rem 0.75rem 0; }
+            #sidebar.open { transform: translateX(0); }
+            #sidebar:not(.open) { transform: translateX(-100%); }
+
+            /* Mobile Header and Overlay for Toggle */
+            #overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 30; display: none; }
+            #sidebar.open + #overlay { display: block; }
+             #welcome-modal { padding: 0.5rem; }
+        }
+
+        /* Welcome Modal specific styles */
+        .welcome-page {
+            width: 100%;
+            flex-shrink: 0; 
+        }
+        
+        /* Loading Spinner Animation */
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        /* Loading Spinner for Auth */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* UI ADJUSTMENT: Blinking cursor for streaming effect */
+        .blinking-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1.2em;
+            background-color: currentColor;
+            animation: blink 1s step-end infinite;
+            vertical-align: bottom;
+        }
+        @keyframes blink {
+            from, to { opacity: 1 }
+            50% { opacity: 0 }
+        }
+
+        /* UI ADJUSTMENT: Golden badge for personalized greeting */
+        .user-name-badge {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border: 2px solid #FFD700;
+            border-radius: 12px;
+            background: linear-gradient(145deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.05));
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+            font-weight: 700;
+            color: #FFF; /* White text on the badge */
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            margin: 0 0.25rem;
+        }
+
+    </style>
+</head>
+<body id="app-body" class="flex h-screen antialiased theme-mekelle"> <!-- Set MU Theme as Default -->
+
+    <!-- Mobile Overlay for Sidebar -->
+    <div id="overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar (Left Nav for Conversations and Links) -->
+    <nav id="sidebar" class="w-64 flex-shrink-0 glass glass-sidebar p-4 flex flex-col transition-transform duration-300">
+         <!-- User Profile Section (MODIFIED FOR LOADING INDICATOR) -->
+        <div id="sidebar-user-info" class="pb-4 border-b border-white/20 mb-4 flex items-center space-x-3">
+            <img id="user-profile-icon" src="myImage.png" width="40" height="40" class="rounded-full border-2 border-primary">
+            <div class="flex flex-col overflow-hidden flex-1">
+                <span id="user-name-display" class="text-white font-semibold whitespace-nowrap overflow-hidden text-ellipsis">Loading...</span>
+                <span id="user-type-display" class="text-xs font-medium text-secondary whitespace-nowrap overflow-hidden text-ellipsis">Regular</span>
+            </div>
+            <!-- Loading Indicator for Firebase Fetch (NEW) -->
+            <div id="user-info-loading-status" class="flex flex-col items-center text-xs ml-2 hidden">
+                <svg id="user-info-spinner" class="animate-spin h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span id="user-info-status-text" class="text-primary mt-1 whitespace-nowrap">Loading...</span>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-between pb-4 border-b border-white/20 mb-4">
+            <!-- University Logo/Title Icon -->
+            <h2 class="text-2xl font-bold tracking-wider text-primary">MU Chat AI</h2>
+            <!-- Close button for mobile -->
+            <button class="md:hidden p-1 text-white hover:text-primary" onclick="toggleSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+
+        <!-- New Chat Button -->
+        <button id="new-chat-btn" class="w-full text-white py-2 rounded-xl mb-4 text-lg font-semibold transition duration-150 shadow-lg bg-primary hover:bg-primary" onclick="startNewChat()">
+            + New Chat
+        </button>
+
+        <!-- Conversation History List -->
+        <div class="flex-1 overflow-y-auto space-y-2">
+            <h3 class="text-sm font-semibold uppercase text-secondary mb-2">Past Conversations</h3>
+            <ul id="conversation-list" class="space-y-1">
+                <!-- Conversations will be injected here by renderConversationList() -->
+            </ul>
+        </div>
+        
+        <!-- Footer Links (Modified to add Sign Out) -->
+        <div class="pt-4 border-t border-white/20 mt-4 space-y-2">
+            <a href="#" class="block p-2 rounded-lg text-sm text-secondary hover:bg-white/10 transition duration-100" onclick="showAboutModal(); return false;">
+                My Creator
+            </a>
+            <a href="#" class="block p-2 rounded-lg text-sm text-secondary hover:bg-white/10 transition duration-100" onclick="showThemeModal(); return false;">
+                Choose Theme
+            </a>
+             <!-- Sign Out Button (NEW) -->
+            <a href="#" class="block p-2 rounded-lg text-sm text-red-400 hover:bg-red-900/50 transition duration-100" onclick="signOutUser(); return false;">
+                Sign Out
+            </a>
+            <p class="text-xs text-secondary mt-2">v1.0 | Made By Amaniel Niguse</p>
+        </div>
+    </nav>
+
+    <!-- Main Chat Area -->
+    <div class="flex-1 flex flex-col chat-main">
+        <!-- Header -->
+        <header class="glass sticky top-0 z-10 p-4 border-b border-white/20 shadow-lg md:hidden">
+            <div class="flex items-center justify-between"> <!-- Added justify-between for 'About Me' icon -->
+                <div class="flex items-center space-x-3">
+                    <button class="p-1 text-white" onclick="toggleSidebar()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                    <img src="icon.png" width="60" height="60">
+                    <h1 class="text-xl font-bold text-white">Mekelle University AI Assistant</h1>
+                </div>
+                <!-- About Me Icon -->
+                <button class="p-1 text-white hover:text-primary" onclick="showAboutModal(); return false;">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Chat Container -->
+        <main id="chat-container-main" class="flex-1 overflow-y-auto p-4 md:p-8">
+            <div id="chat-messages" class="max-w-4xl mx-auto space-y-8 pb-20">
+                
+                <!-- Initial Greeting (MODIFIED for dynamic content) -->
+                <div id="greeting" class="text-center py-16">
+                    <div class="inline-block p-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full">
+                        <img src="myImage.png" width="200" height="200">
+                    </div>
+                    <!-- UI ADJUSTMENT: Loading indicator inside greeting -->
+                    <div id="greeting-loading" class="mt-6 flex flex-col items-center justify-center">
+                         <svg class="animate-spin h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <p class="text-lg text-secondary mt-2">Loading your profile...</p>
+                    </div>
+                    
+                    <!-- UI ADJUSTMENT: Personalized content area (hidden initially) -->
+                    <div id="greeting-personalized" class="hidden">
+                        <h2 id="personalized-greeting-text" class="mt-6 text-4xl font-extrabold text-white">Hi, Mekelle University Students!</h2>
+                        <p id="premium-support-message" class="hidden mt-2 text-yellow-300 font-semibold">Thank you for your support!</p>
+                        <p class="mt-2 text-lg text-secondary">I'm here to assist you with your studies and campus life.</p>
+                    </div>
+
+                    <div class="mt-8 space-y-2 text-secondary text-sm">
+                        <h3 class="text-xl font-semibold mb-2 text-white">Creator Contact:</h3>
+                        <p class="text-secondary">Contact: Amaniel Niguse (Department of Economics)</p>
+                        <p class="text-secondary">🗨 Telegram: @Amax_v2</p>
+                        <p class="text-secondary">📧 Email: amanial.v2@gmail.com</p>
+                        <p class="text-secondary">☎️ : +251980337790</p> 
+                        <p class="text-secondary"> <b>🎁 If you appreciate my app, Show me your support By donating the amount you desire to
+                        <li> 🔰 Telebirr : +251980337790</li></b></p>
+                    </div>
+                </div>
+
+                <!-- Chat messages will be appended here dynamically -->
+                
+                <!-- Typing Indicator Placeholder -->
+                <div id="typing-indicator" class="flex justify-start w-full hidden">
+                    <div class="flex items-start max-w-full sm:max-w-xl">
+                        <div class="p-4 glass model-bubble order-2 rounded-br-xl rounded-tr-xl rounded-tl-3xl">
+                            <div class="typing-indicator text-primary">
+                                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin: 0 2px; animation: bounce 1.2s infinite ease-in-out; background-color: currentColor; opacity: 0.8;"></span>
+                                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin: 0 2px; animation: bounce 1.2s infinite ease-in-out; animation-delay: 0.2s; background-color: currentColor; opacity: 0.8;"></span>
+                                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin: 0 2px; animation: bounce 1.2s infinite ease-in-out; animation-delay: 0.4s; background-color: currentColor; opacity: 0.8;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </main>
+
+        <!-- Input Area -->
+        <footer class="glass fixed bottom-0 left-0 right-0 p-3 border-t border-white/20">
+            <div class="max-w-4xl mx-auto">
+                
+                <!-- Premium Notification (NEW - HIDDEN BY DEFAULT, SHOWN ON CLICK IF NOT PREMIUM) -->
+                <div id="premium-notification" class="hidden text-center text-sm p-2 mb-2 bg-yellow-900/30 text-yellow-300 rounded-lg border border-yellow-500/50 transition duration-300 opacity-0">
+                    <p class="font-semibold">File Upload is a Premium Feature!</p>
+                    <button class="text-primary hover:underline font-bold mt-1" onclick="showPaymentInstructionModal();">Click here for payment instructions.</button>
+                </div>
+                
+                <!-- Preview Area for Image Upload/File Attachment (p-2, mb-2 reduced) -->
+                <div id="image-preview-container" class="hidden p-2 mb-2 glass rounded-xl border-white/20 relative">
+                    <div class="flex items-center space-x-3">
+                        <span id="file-icon" class="text-primary">
+                             <!-- Placeholder for File Icon (e.g., PDF, DOC) -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                            </svg>
+                        </span>
+                        <span class="text-sm font-medium text-secondary" id="file-name-display">File Attached: </span>
+                    </div>
+                    <img id="image-preview" class="max-h-32 rounded-lg mt-2 object-cover hidden" />
+                    <button class="absolute top-2 right-2 bg-red-600 rounded-full p-1 text-white hover:bg-red-700" onclick="clearUploadedImage()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+
+                <form id="chat-form" class="flex items-center space-x-2 rounded-full p-1.5 focus-within:ring-2 focus-within:ring-blue-500/50 input-opaque">
+                    
+                    <!-- File Upload Button (Restricted accept attribute for stability) -->
+                    <label for="file-upload" class="cursor-pointer p-2.5 rounded-xl text-secondary hover:text-primary transition duration-150" id="file-upload-label">
+                        <!-- Paperclip Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.2"/></svg>
+                    </label>
+                    <input id="file-upload" type="file" 
+                        accept="image/*,
+                                application/pdf,
+                                text/plain" 
+                        class="hidden" 
+                        onchange="handleFileUpload(event)">
+                    
+                    <!-- Reduced vertical padding in input -->
+                    <input id="chat-input" type="text" placeholder="Ask..." class="flex-1 bg-transparent outline-none px-2 py-1 text-white placeholder-gray-400 text-lg" style="margin-left:-25px;"autocomplete="on" required>
+                    
+                    <button id="send-button" type="submit" class="text-white rounded-full p-1.5 w-9 h-9 flex items-center justify-center transition duration-150 disabled:opacity-70 bg-primary hover:bg-primary">
+                        <!-- Send Icon -->
+                        <svg id="send-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                        <!-- Loading Spinner (Visible by default and controlled by JS) -->
+                        <svg id="loading-spinner" class="animate-spin h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Modal for About Us -->
+    <div id="about-modal" class="fixed inset-0 bg-black/70 z-30 hidden items-center justify-center p-4">
+        <div class="glass w-full max-w-lg p-6 rounded-2xl text-secondary">
+            <h2 class="text-3xl font-bold mb-4 text-primary">About</h2>
+            <p class="mb-4">
+                📖 This AI assistant is designed to support students of Mekelle University. This app was created by Amaniel Niguse, a student in Mekelle University in the Department of Economics.
+           <br>📀 I am passionate about technology. I have strong foundation in computer programming and software engineering.  I created this app as an assignment from LinkedIn Learning.
+           <br>💡 Thank you for using my app and share it with your friends. Who knows someone might hire me 😁😁 
+           <br>📢 I give service of creating apps and websites. If you want I can provide 24/7 secure apps and websites just contact me          </p>
+         <img src="myImage.png" width="150" height="150">
+            <p class="text-secondary">
+                Contact: Amaniel Niguse (Department of Economics)
+            </p>
+            <p class="text-secondary">
+               🗨 Telegram: @Amax_v2
+            </p>
+            <p class="text-secondary">
+               📧 Email: amanial.v2@gmail.com 
+            </p>
+            <p class="text-secondary">
+               ☎️ : +251980337790
+            </p>
+            <button class="mt-6 w-full text-white py-2 rounded-xl font-semibold transition bg-primary hover:bg-primary" onclick="closeAboutModal()">Close</button>
+        </div>
+    </div>
+    
+     <!-- NEW: Premium Payment Instructions Modal -->
+    <div id="payment-instruction-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4">
+        <div class="glass w-full max-w-lg p-6 rounded-2xl text-white">
+            <h2 class="text-3xl font-bold mb-4 text-green-400">Unlock Premium Features</h2>
+            <p class="mb-4 text-lg">
+ፋይል upload ለማድረግ፣ ገደብ የሌለው ለመጠቀም ክፍያ መክፈል ግድ ነው። premium ከሆንክ/ሽ AIዩ ከዚህ በፊት የመቐለ ዩኒቨርስቲ ፈተናዎች፣ ሞጁሎች የሁሉም ዲፓርትመንት የፍሬሽም ጭምር ስላለው, ጥያቄዎቹን በዛ መሰረት ነው የሚመልሰው። ይሄ ሁላ በ 50 ብር ብቻ። 
+<br>🗨 ታድያ እንዴት ልክፈል? </br>
+<br>እሱማ ቀላል ነው። ይህንን step ተከተል:</br>
+
+            </p>
+          <li class="text-white">1. ወደ ባንክ ወይም ቴሌብር ገንዘቡ ማስገባት ነው</li>  
+            <ul class="list-decimal list-inside space-y-2 mb-6 ml-4 text-secondary">
+                
+                        <li>🔰 **Telebirr**: <span class="font-bold">+251980337790</span></li>
+                                                <li>🔰 **Bank**: <span class="font-bold">1000653919305</span></li>
+                                                                        <li>🔰 **የገንዘብ መጠን**: <span class="font-bold">50 ብር  (ከዛ በላይ ቢሆንም, ችግር የለውም ደስ ይላል 😆 )</span></li>
+                    </ul>
+                </li>
+                <li class="text-white">2. 🚨 ከዛ የከፈልክበት screenshot እና የተመዘገብክበት  ID/UGR  ወደ ቴሌግራም አካውንቴ ከፍያለው ብለህ/ሽ ትልካለህ/ሽ። (ይቺ step ትኩረት አርጉባት)
+                    <p class="text-green-400 font-bold ml-6 mt-1">🗨 Telegram: <a href="https://t.me/Amax_v2" target="_blank" class="underline">@Amax_v2(click here)</a></p>
+                </li>
+                <li class="text-white">3. በመጨረሻ በ 3-5 ስዓት ውስጥ አፕልኬሽኑን ዘግተህ/ሽ ክፈተው/ቺው። ያኔ Premium የሚል ፅሁፍ ይመጣል። ቸረስክ በቃ፣ ፈታ በልበት</li>
+            </ul>
+            
+            <button class="mt-6 w-full text-white py-2 rounded-xl font-semibold transition bg-primary hover:bg-primary" onclick="document.getElementById('payment-instruction-modal').classList.add('hidden');">Got It! (ገብቶኛል)</button>
+        </div>
+    </div>
+    
+     <!-- NEW: Premium Welcome Modal (One-time notification) -->
+    <div id="premium-welcome-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4">
+        <div class="glass w-full max-w-lg p-8 rounded-2xl text-center text-white border-4 border-green-500 shadow-2xl">
+            <img src="myImage.png" width="100" height="100" class="mx-auto mb-4 rounded-full border-2 border-green-400"/>
+            <h2 class="text-4xl font-extrabold mb-3 text-green-400 animate-pulse">PREMIUM UNLOCKED!</h2>
+            <p class="text-xl mb-6 text-white">
+                Thank you for becoming a **Mekelle University AI Premium User**!
+            </p>
+            <p class="text-lg text-secondary">
+                You now have unlimited access to **File/Document Upload** and support the continued development of this assistant. Happy chatting!
+            </p>
+            <button class="mt-8 w-full max-w-xs text-white py-3 rounded-xl text-lg font-semibold transition bg-green-600 hover:bg-green-700" onclick="document.getElementById('premium-welcome-modal').classList.add('hidden');">
+                Start Using Premium Features
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Modal for Theme Selection -->
+    <div id="theme-modal" class="fixed inset-0 bg-black/70 z-30 hidden items-center justify-center p-4">
+        <div class="glass w-full max-w-lg p-6 rounded-2xl text-secondary">
+            <h2 class="text-3xl font-bold mb-4 text-primary">Choose a Theme</h2>
+            <p class="mb-6">Select a visual style for the interface.</p>
+            <div class="space-y-4">
+                
+                <button class="w-full text-left p-4 rounded-xl transition duration-150 border-2 border-transparent focus:outline-none theme-mekelle bg-white/10 hover:border-green-500" onclick="applyTheme('mekelle')">
+                    <h4 class="font-bold text-xl text-green-400">1. Mekelle University (Default)</h4>
+                    <p class="text-sm text-blue-300">Official Blue/Green/White theme.</p>
+                </button>
+
+                <button class="w-full text-left p-4 rounded-xl transition duration-150 border-2 border-transparent focus:outline-none theme-futuristic bg-white/10 hover:border-cyan-500" onclick="applyTheme('futuristic')">
+                    <h4 class="font-bold text-xl text-cyan-300">2. Futuristic</h4>
+                    <p class="text-sm text-cyan-200">Deep blur, neon glow, and minimalist tech aesthetic.</p>
+                </button>
+                
+                <button class="w-full text-left p-4 rounded-xl transition duration-150 border-2 border-transparent focus:outline-none theme-neodarkbg-white/70 hover:border-blue-500" onclick="applyTheme('neodark')">
+                    <h4 class="font-bold text-xl text-blue-500">3. NeoDark(New)</h4>
+                    <p class="text-sm text-gray-500">Light theme with high blur and soft gradients.</p>
+                </button>
+                
+                <button class="w-full text-left p-4 rounded-xl transition duration-150 border-2 border-transparent focus:outline-none theme-neolight bg-white/70 hover:border-violet-500" onclick="applyTheme('neolight')">
+                    <h4 class="font-bold text-xl text-violet-700">4. Neomorphic</h4>
+                    <p class="text-sm text-violet-500">Soft, light, and dreamy gradients.</p>
+                </button>
+
+                <button class="w-full text-left p-4 rounded-xl transition duration-150 border-2 border-transparent focus:outline-none theme-vibrant bg-white/10 hover:border-blue-500" onclick="applyTheme('vibrant')">
+                    <h4 class="font-bold text-xl text-blue-300">5. Vibrant</h4>
+                    <p class="text-sm text-blue-200">Cool, deep purples and blues with brighter accents.</p>
+                </button>
+                
+            </div>
+            <button class="mt-6 w-full text-white py-2 rounded-xl font-semibold transition bg-primary hover:bg-primary" onclick="closeThemeModal()">Close</button>
+        </div>
+    </div>
+    
+    <!-- Sign-up/Sign-in Modal (CORRECTED LOGIC) -->
+    <div id="auth-modal" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4">
+        <div class="glass w-full max-w-lg p-6 rounded-2xl text-secondary">
+            <h2 id="auth-title" class="text-3xl font-bold mb-4 text-primary text-center">Sign In</h2>
+            <form id="auth-form" class="space-y-4">
+                <!-- Sign-In Field -->
+                <div id="signin-field">
+                    <input type="text" id="auth-email" placeholder="UGR or ID with no / " required 
+                        class="w-full p-3 rounded-lg bg-white/10 text-white placeholder-secondary focus:ring-2 focus:ring-primary focus:outline-none border border-transparent">
+                </div>
+
+                <!-- Sign-Up Fields -->
+                <div id="signup-fields" class="hidden space-y-4">
+                     <div>
+                        <input type="text" id="auth-name" placeholder="Name" required 
+                            class="w-full p-3 rounded-lg bg-white/10 text-white placeholder-secondary focus:ring-2 focus:ring-primary focus:outline-none border border-transparent">
+                     </div>
+                     <div>
+                        <input type="text" id="auth-muid" placeholder="Mekelle University ID (e.g. Your UGR, no / )" required 
+                            class="w-full p-3 rounded-lg bg-white/10 text-white placeholder-secondary focus:ring-2 focus:ring-primary focus:outline-none border border-transparent">
+                    </div>
+                </div>
+                
+                <!-- Password Field (Shared) -->
+                <div>
+                    <input type="password" id="auth-password" placeholder="Password" required 
+                        class="w-full p-3 rounded-lg bg-white/10 text-white placeholder-secondary focus:ring-2 focus:ring-primary focus:outline-none border border-transparent">
+                </div>
+
+                <button id="auth-submit-btn" type="submit" class="w-full text-white py-3 rounded-xl text-xl font-semibold transition bg-primary hover:bg-primary">
+                    Sign In
+                </button>
+            </form>
+
+            <p id="auth-toggle-text" class="text-center mt-4 text-sm">
+                Don't have an account? 
+                <a href="#" class="text-primary hover:underline font-semibold" onclick="toggleAuthMode(event, 'signup')">Sign Up</a>
+            </p>
+
+            <!-- Loading Indicator -->
+            <div id="auth-loading" class="hidden flex justify-center items-center mt-4">
+                <svg class="animate-spin h-6 w-6 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span class="ml-2 text-white">Processing...</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Welcome/Onboarding Modal (Starts from Page 2 now, after sign up) -->
+    <div id="welcome-modal" class="fixed inset-0 bg-black/70 z-40 hidden items-center justify-center p-4">
+        <div class="glass w-full max-w-3xl h-full max-h-[600px] p-6 rounded-2xl flex flex-col">
+            <!-- Pages Container (Flexbox for horizontal scroll) -->
+            <div id="welcome-pages-container" class="flex-1 overflow-x-hidden relative">
+                <div id="welcome-pages" class="flex h-full transition-transform duration-300">
+                    
+                    <!-- Page 1: Sign Up & Persona (MODIFIED) - Index 0 -->
+                    <div class="welcome-page p-4 text-center flex flex-col justify-center items-center">
+                         <img src="icon.png" width="150" height= "150">
+                        <h2 class="text-4xl font-extrabold text-white mb-2">Welcome! Let's Get Started.</h2>
+                        <p class="text-secondary text-lg mb-6">Please confirm your MU user details.</p>
+                        
+                        <!-- Onboarding Input Form (Now just a confirmation/save for non-firebase signups) -->
+                        <form id="onboarding-form" class="w-full max-w-sm space-y-4">
+                            <div>
+                                <input type="text" id="user-name" placeholder="Full Name" disabled 
+                                    class="w-full p-3 rounded-lg bg-white/10 text-white placeholder-secondary focus:ring-2 focus:ring-primary focus:outline-none border border-transparent">
+                            </div>
+                            <div>
+                                <input type="text" id="user-id" placeholder="Mekelle University ID" disabled 
+                                    class="w-full p-3 rounded-lg bg-white/10 text-white placeholder-secondary focus:ring-2 focus:ring-primary focus:outline-none border border-transparent">
+                            </div>
+                            <!-- Added placeholders for confirmation text (NEW) -->
+                            <p class="text-sm text-secondary">Email: <span id="onboarding-email-display">N/A</span></p>
+                        </form>
+                        
+                        <p class="text-xs text-secondary mt-4">Your details were securely registered on sign-up.</p>
+                    </div>
+
+                    <!-- Page 2: Multimodal Capabilities - Index 1 -->
+                    <div class="welcome-page p-4 text-center flex flex-col justify-center items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary mb-4">
+                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                        <h2 class="text-4xl font-extrabold text-white mb-2">Multimodal Power</h2>
+                        <p class="text-secondary text-lg mb-6">Attach files for deep analysis (up to 10MB):</p>
+                        <div class="flex flex-wrap justify-center gap-4 text-sm text-secondary">
+                            <span class="p-3 bg-white/10 rounded-lg">For all Departments</span>
+                            <span class="p-3 bg-white/10 rounded-lg">For Freshmans</span>
+                            <span class="p-3 bg-white/10 rounded-lg">Even for Lecturers 😁😁</span>
+                            <span class="p-3 bg-white/10 rounded-lg">Any Course</span>
+                        </div>
+                    </div>
+
+                    <!-- Page 3: Themes - Index 2 -->
+                    <div class="welcome-page p-4 text-center flex flex-col justify-center items-center">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary mb-4">
+                            <path d="M12 21.5V6M12 6l-4 4m4-4l4 4M2 17h20M12 6l-4-4m4 4l4-4M2 17h20M12 6l-4 4m4-4l4 4"/>
+                        </svg>
+                        <h2 class="text-4xl font-extrabold text-white mb-2">Personalize Your UI</h2>
+                        <p class="text-secondary text-lg mb-6">5 different themes</p>
+                        <div class="flex flex-wrap justify-center gap-4 text-sm text-secondary">
+                            <span class="p-3 bg-primary text-white rounded-lg font-medium">MU Blue/Green</span>
+                           <span class="p-3 bg-primary text-white rounded-lg font-medium">Futuristic Neon</span>
+                             <span class="p-3 bg-primary text-white rounded-lg font-medium">NeoDark/ neolight / Vibrant</span>
+                        </div>
+                    </div>
+
+                     <!-- Page 4: Registration & Final Start (MODIFIED) - Index 3 -->
+                    <div class="welcome-page p-4 text-center flex flex-col justify-center items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary mb-4">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <h2 class="text-4xl font-extrabold text-white mb-2">You're All Set!</h2>
+                        <img src="myImage.png" width="200" height="200">
+                        
+                        <p class="text-sm text-secondary mb-4 max-w-md">Amaniel Says Hi 👋👋</p>
+                        
+                        <p class="text-white font-bold mb-4">
+                        <p class="text-sm text-secondary mb-4 max-w-md">By Amaniel Niguse</p>
+                        
+                        <p class="text-white font-bold mb-4">
+                            🗨 Telegram: @Amax_v2 <br>
+                            📧 Email: amanial.v2@gmail.com
+                        </p>
+
+                        <button class="w-full max-w-xs text-white py-3 rounded-xl text-xl font-semibold transition bg-primary hover:bg-primary" onclick="hideWelcomeModal()">
+                            Start Chatting Now!
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="flex justify-between items-center pt-4">
+                <div id="welcome-dots" class="flex space-x-2">
+                    <span class="dot w-3 h-3 rounded-full bg-primary transition-all duration-300"></span>
+                    <span class="dot w-3 h-3 rounded-full bg-secondary/50 transition-all duration-300"></span>
+                    <span class="dot w-3 h-3 rounded-full bg-secondary/50 transition-all duration-300"></span>
+                    <span class="dot w-3 h-3 rounded-full bg-secondary/50 transition-all duration-300"></span>
+                </div>
+                <!-- Navigation Buttons -->
+                <div class="flex space-x-2">
+                    <button id="welcome-prev-btn" class="text-secondary hover:text-primary disabled:opacity-50 transition duration-150 p-2" onclick="changeWelcomePage(-1)" disabled>
+                      PREV
+                    </button>
+                    <button id="welcome-next-btn" class="text-primary hover:text-primary/80 disabled:opacity-50 transition duration-150 p-2" onclick="changeWelcomePage(1)">
+                        NEXT
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Firebase + App Logic -->
+    <script type="module">
+        // -------------------------
+        // Firebase Initialization
+        // -------------------------
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyBh191MKqgfGs1UPJFEuVgW_C7VoXIKId4",
+          authDomain: "mekelle-university-ai.firebaseapp.com",
+          projectId: "mekelle-university-ai",
+          storageBucket: "mekelle-university-ai.firebasestorage.app",
+          messagingSenderId: "719481036353",
+          appId: "1:719481036353:web:02d48a981b0eb05098b0c0",
+          measurementId: "G-15KZL25K72"
+        };
+
+        const fbApp = initializeApp(firebaseConfig);
+        const auth = getAuth(fbApp);
+        const db = getFirestore(fbApp);
+
+        // -------------------------
+        // DOM Refs & State (Firebase Related - MODIFIED)
+        // -------------------------
+        const authModal = document.getElementById('auth-modal');
+        const welcomeModal = document.getElementById('welcome-modal');
+        const authForm = document.getElementById('auth-form');
+        const authTitle = document.getElementById('auth-title');
+        const authSubmitBtn = document.getElementById('auth-submit-btn');
+        const authToggleText = document.getElementById('auth-toggle-text');
+        const signupFields = document.getElementById('signup-fields');
+        const authLoading = document.getElementById('auth-loading');
+        const userNameDisplay = document.getElementById('user-name-display');
+        const userTypeDisplay = document.getElementById('user-type-display');
+        const onboardingEmailDisplay = document.getElementById('onboarding-email-display');
+        const onboardingUserNameInput = document.getElementById('user-name');
+        const onboardingUserIDInput = document.getElementById('user-id');
+        const welcomeNextBtn = document.getElementById('welcome-next-btn');
+        const premiumNotification = document.getElementById('premium-notification'); 
+        const paymentInstructionModal = document.getElementById('payment-instruction-modal'); 
+        const premiumWelcomeModal = document.getElementById('premium-welcome-modal'); 
+        const fileUploadLabel = document.getElementById('file-upload-label');
+        
+        // Sidebar Loading Refs
+        const userInfoSpinner = document.getElementById('user-info-spinner');
+        const userInfoStatusText = document.getElementById('user-info-status-text');
+        const userInfoLoadingStatus = document.getElementById('user-info-loading-status');
+        
+        // UI ADJUSTMENT: Greeting Refs
+        const greetingLoading = document.getElementById('greeting-loading');
+        const greetingPersonalized = document.getElementById('greeting-personalized');
+        const personalizedGreetingText = document.getElementById('personalized-greeting-text');
+        const premiumSupportMessage = document.getElementById('premium-support-message');
+
+
+        // Current auth mode: 'signin' or 'signup'
+        let authMode = 'signin'; 
+        // Global state for chat logic
+        window.isPremium = false; 
+        window.isUserLoggedIn = false;
+        let waitingForFirebase = true; 
+
+        // -------------------------
+        // UI Utility Functions (Firebase Related)
+        // -------------------------
+
+        /** Toggles between Sign In and Sign Up modes. */
+        window.toggleAuthMode = function(event, mode) {
+    if (event) event.preventDefault();
+    authMode = mode || (authMode === 'signin' ? 'signup' : 'signin');
+    
+    const isSignin = authMode === 'signin';
+    
+    authTitle.textContent = isSignin ? 'Sign In' : 'Create Account';
+    authSubmitBtn.textContent = isSignin ? 'Sign In' : 'Sign Up';
+    
+    const signinField = document.getElementById('signin-field');
+    const signupFieldsContainer = document.getElementById('signup-fields');
+
+    signinField.classList.toggle('hidden', !isSignin);
+    signupFieldsContainer.classList.toggle('hidden', isSignin);
+
+    // 🔥 THE FIX: correctly assign required fields
+    document.getElementById('auth-email').required = isSignin;
+    document.getElementById('auth-password').required = true;
+    document.getElementById('auth-name').required = !isSignin;
+    document.getElementById('auth-muid').required = !isSignin;
+
+    authToggleText.innerHTML = isSignin ? 
+        'Don\'t have an account? <a href="#" class="text-primary hover:underline font-semibold" onclick="toggleAuthMode(event, \'signup\')">Sign Up</a>' :
+        'Already have an account? <a href="#" class="text-primary hover:underline font-semibold" onclick="toggleAuthMode(event, \'signin\')">Sign In</a>';
+};
+
+
+        /** Shows the auth modal. */
+        function showAuthModal() {
+            authModal.classList.add('flex');
+            authModal.classList.remove('hidden');
+        }
+
+        /** Hides the auth modal. */
+        function hideAuthModal() {
+            authModal.classList.add('hidden');
+            authModal.classList.remove('flex');
+        }
+        
+        /** Shows the payment instruction modal. */
+        window.showPaymentInstructionModal = function() {
+             paymentInstructionModal.classList.add('flex');
+             paymentInstructionModal.classList.remove('hidden');
+        }
+        
+        /** NEW: Shows the premium notification and auto-hides after 5 seconds */
+        window.showPremiumNotification = function() {
+            // Ensure any existing timeout is cleared
+            if (window.premiumTimeout) {
+                clearTimeout(window.premiumTimeout);
+            }
+            
+            premiumNotification.classList.remove('hidden');
+            // Force opacity for transition
+            setTimeout(() => { premiumNotification.style.opacity = '1'; }, 10); 
+
+            window.premiumTimeout = setTimeout(() => {
+                premiumNotification.style.opacity = '0';
+                // Delay hiding the element until transition is complete
+                setTimeout(() => { premiumNotification.classList.add('hidden'); }, 300); 
+            }, 5000); // 5000 milliseconds = 5 seconds
+        }
+
+        /** Signs out the current user. */
+        window.signOutUser = async function() {
+            try {
+                // Clear local conversations
+                window.localStorage.removeItem(window.CHAT_STORAGE_KEY);
+                window.chatHistory = [];
+                window.currentChatId = null;
+                window.renderConversationList();
+                
+                await signOut(auth);
+                alert('You have been signed out.');
+                // Clear local state
+                localStorage.removeItem('mu_user_name');
+                localStorage.removeItem('mu_user_type');
+                localStorage.removeItem('mu_premium_welcome_shown'); // Clear premium flag for next login
+                window.isPremium = false;
+                window.isUserLoggedIn = false;
+                // Hide premium notification
+                premiumNotification.classList.add('hidden');
+                // Show auth modal again
+                showAuthModal();
+            } catch (error) {
+                console.error('Sign out error:', error);
+                alert('Failed to sign out.');
+            }
+        }
+
+        // -------------------------
+        // Firebase Auth Logic
+        // -------------------------
+
+        /** Submits the Sign In or Sign Up form. */
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            authLoading.classList.remove('hidden');
+            authSubmitBtn.disabled = true;
+
+            const password = document.getElementById('auth-password').value;
+
+            try {
+                if (authMode === 'signup') {
+                    // CORRECTED LOGIC: Simplified signup using ID and Name
+                    const name = document.getElementById('auth-name').value.trim();
+                    const muId = document.getElementById('auth-muid').value.trim();
+
+                    if (!name || !muId) {
+                        alert('Full Name and Mekelle University ID cannot be empty.');
+                        throw new Error('Empty Name or MU ID');
+                    }
+                    
+                    const email = `${muId}@mu.edu.et`;
+
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+                    
+                    await updateProfile(user, { displayName: name });
+
+                    await setDoc(doc(db, 'users', user.uid), {
+                        name: name,
+                        muId: muId,
+                        isPremium: false,
+                        createdAt: new Date(),
+                        email: email
+                    });
+
+                    localStorage.setItem('mu_user_name', name);
+                    localStorage.setItem('mu_user_muid', muId);
+                    localStorage.setItem('mu_user_email', email);
+
+                    hideAuthModal();
+                    alert('Account created successfully! Welcome. Please complete the quick onboarding.');
+                    
+                } else { // Sign In
+                    // CORRECTED LOGIC: Handle both ID and full email for sign in
+                    let userInput = document.getElementById('auth-email').value.trim();
+                    let emailToSignIn = userInput;
+
+                    // If the input doesn't look like an email, assume it's an ID and append the domain
+                    if (userInput && !userInput.includes('@')) {
+                        emailToSignIn = `${userInput}@mu.edu.et`;
+                    }
+
+                    await signInWithEmailAndPassword(auth, emailToSignIn, password);
+                    hideAuthModal(); // onAuthStateChanged handles success
+                }
+            } catch (error) {
+                console.error('Auth Error:', error.code, error.message);
+                alert(`Authentication failed: ${error.message.replace('Firebase: ', '')}`);
+            } finally {
+                authLoading.classList.add('hidden');
+                authSubmitBtn.disabled = false;
+            }
+        });
+
+        // -------------------------
+        // Auth State Listener
+        // -------------------------
+
+        onAuthStateChanged(auth, async (user) => {
+            waitingForFirebase = false;
+            const wasPremium = window.isPremium; // Capture previous premium status
+            
+            // Show sidebar loading indicator
+            userInfoLoadingStatus.classList.remove('hidden'); 
+            userInfoSpinner.classList.remove('hidden'); 
+            userInfoStatusText.textContent = 'Loading...'; 
+
+            // UI ADJUSTMENT: Show main greeting loading indicator
+            greetingLoading.classList.remove('hidden');
+            greetingPersonalized.classList.add('hidden');
+
+
+            if (user) {
+                window.isUserLoggedIn = true;
+                
+                // 1. Fetch User Data (if online)
+                if (navigator.onLine) {
+                    try {
+                        const userDocRef = doc(db, 'users', user.uid);
+                        const snapshot = await getDoc(userDocRef);
+                        if (snapshot.exists()) {
+                            const data = snapshot.data();
+                            window.isPremium = !!data.isPremium;
+                            const name = data.name || user.displayName || 'MU User';
+                            const userType = window.isPremium ? 'Premium' : 'Regular';
+                            const muId = data.muId || 'N/A';
+                            const email = data.email || 'N/A';
+
+                            // Store locally for display (and offline use)
+                            localStorage.setItem('mu_user_name', name);
+                            localStorage.setItem('mu_user_type', userType);
+                            localStorage.setItem('mu_user_muid', muId);
+                            localStorage.setItem('mu_user_email', email);
+                            
+                            // Update Onboarding UI
+                            onboardingUserNameInput.value = name;
+                            onboardingUserIDInput.value = muId;
+                            onboardingEmailDisplay.textContent = email;
+
+                        } else {
+                            console.warn("User document not found! Forcing sign out for re-registration.");
+                            userInfoLoadingStatus.classList.add('hidden');
+                            await signOut(auth);
+                            return;
+                        }
+                    } catch (err) {
+                        console.error('Error reading user doc:', err);
+                        alert('Failed to load user profile. Please try signing in again.');
+                        userInfoLoadingStatus.classList.add('hidden');
+                        await signOut(auth);
+                        return;
+                    } finally {
+                        // HIDE SPINNER AND MARK DONE AFTER FETCH ATTEMPT
+                        userInfoSpinner.classList.add('hidden');
+                        userInfoStatusText.textContent = 'Done';
+                        setTimeout(() => userInfoLoadingStatus.classList.add('hidden'), 1500); // Hide after a delay
+                    }
+                } else {
+                     // If offline, hide spinner instantly but keep user info
+                    userInfoSpinner.classList.add('hidden');
+                    userInfoStatusText.textContent = 'Offline';
+                    setTimeout(() => userInfoLoadingStatus.classList.add('hidden'), 1500); // Hide after a delay
+                }
+                
+                // 2. Update UI (Sidebar and Greeting)
+                const name = localStorage.getItem('mu_user_name') || 'Offline User';
+                const userType = localStorage.getItem('mu_user_type') || 'Regular';
+                window.isPremium = userType === 'Premium';
+
+                // Sidebar
+                userNameDisplay.textContent = name;
+                userTypeDisplay.textContent = userType;
+                userTypeDisplay.classList.toggle('text-red-400', !window.isPremium);
+                userTypeDisplay.classList.toggle('text-green-400', window.isPremium);
+                
+                // UI ADJUSTMENT: Main Greeting Personalization
+                greetingLoading.classList.add('hidden');
+                personalizedGreetingText.innerHTML = `Hi, <span class="user-name-badge">${name}</span>!`;
+                if (window.isPremium) {
+                    personalizedGreetingText.innerHTML += ' 🥇'; // Add badge icon
+                    premiumSupportMessage.classList.remove('hidden');
+                } else {
+                    premiumSupportMessage.classList.add('hidden');
+                }
+                greetingPersonalized.classList.remove('hidden');
+
+                
+                // 3. Check for NEW Premium status
+                const welcomeShown = localStorage.getItem('mu_premium_welcome_shown');
+                if (window.isPremium && !wasPremium && !welcomeShown) {
+                     premiumWelcomeModal.classList.add('flex');
+                     premiumWelcomeModal.classList.remove('hidden');
+                     localStorage.setItem('mu_premium_welcome_shown', 'true');
+                }
+                
+                // 4. Update Premium Notification state (FIXED: ALWAYS HIDE unless upload is attempted)
+                premiumNotification.classList.add('hidden');
+
+
+                // 5. Show Onboarding (if first time)
+                if (!localStorage.getItem(window.ONBOARDING_STORAGE_KEY)) {
+                    window.showWelcomeModal();
+                }
+
+                // 6. Initialize Chat/History
+                window.initChatAfterAuth(); // Call the main chat initializer
+
+            } else {
+                // Not signed in -> MUST show login/signup page
+                window.isUserLoggedIn = false;
+                window.isPremium = false;
+                userNameDisplay.textContent = 'Guest';
+                userTypeDisplay.textContent = 'Unauthenticated';
+                userTypeDisplay.classList.remove('text-green-400');
+                userTypeDisplay.classList.add('text-red-400');
+                
+                // UI ADJUSTMENT: Reset greeting to default
+                greetingLoading.classList.add('hidden');
+                personalizedGreetingText.innerHTML = 'Hi, Mekelle University Students!';
+                premiumSupportMessage.classList.add('hidden');
+                greetingPersonalized.classList.remove('hidden');
+
+                // Hide premium notification when unauthenticated
+                premiumNotification.classList.add('hidden');
+                
+                // Hide loading status when unauthenticated
+                userInfoLoadingStatus.classList.add('hidden');
+                
+                showAuthModal();
+
+                // If offline, still allow history view, but mark everything as disabled
+                if (!navigator.onLine) {
+                    window.initChatAfterAuth(true); 
+                } else {
+                    // Clear the chat area when unauthenticated
+                    document.getElementById('chat-messages').innerHTML = '';
+                    document.getElementById('chat-messages').appendChild(document.getElementById('greeting'));
+                    document.getElementById('chat-messages').appendChild(document.getElementById('typing-indicator'));
+                }
+            }
+        });
+
+        // -------------------------
+        // Premium Feature Guard (File Upload - MODIFIED)
+        // -------------------------
+        
+        // Add click listener to the label to handle the check *before* the file dialog opens
+        fileUploadLabel.addEventListener('click', (e) => {
+             if (!window.isUserLoggedIn) {
+                alert('Please Sign In or Sign Up to access chat features.');
+                e.preventDefault();
+                return;
+            }
+            
+            if (!navigator.onLine) {
+                alert('You are offline. Uploads require an internet connection. You can still view past conversations.');
+                e.preventDefault();
+                return;
+            }
+
+            if (!window.isPremium) {
+                // Prevent the file dialog from opening
+                e.preventDefault(); 
+                
+                // Show notification and instruction modal (Now using the new function)
+                window.showPremiumNotification(); 
+                window.showPaymentInstructionModal(); 
+                return;
+            }
+            
+            // If premium, allow default action (which is opening the file dialog)
+        });
+
+        // We override the original handleFileUpload before the original script runs,
+        // but now we make sure to save the original logic for internal calling.
+        window.__original_handleFileUpload = window.handleFileUpload; 
+
+        window.handleFileUpload = function(event) {
+            // No need for the premium check here, as the label click handler prevents the 'change' event 
+            // from firing if the user is not premium. This logic block only runs if a file was successfully selected (i.e., user is premium).
+            
+            // If premium and online, call original handler
+            try {
+                // Hide notification if user somehow tries to upload while premium status is in flux
+                premiumNotification.classList.add('hidden'); 
+                window.__original_handleFileUpload(event);
+            } catch(e) {
+                console.error('Error in original file upload handler:', e);
+            }
+        };
+        
+        // -------------------------
+        // Global Chat Initializer (called by Auth Listener)
+        // -------------------------
+        window.initChatAfterAuth = function(offline = false) {
+            // Re-run the core initialization logic now that we have auth status
+            window.loadTheme();
+            window.renderConversationList();
+            const conversations = window.getSavedConversations();
+            const conversationKeys = Object.keys(conversations).sort((a, b) => parseInt(b) - parseInt(a));
+
+            if (conversationKeys.length > 0) {
+                window.loadSpecificConversation(conversationKeys[0]);
+            } else {
+                window.startNewChat();
+            }
+            
+            // Set input state based on authentication and disable file upload icon if not premium
+            const isInputAllowed = window.isUserLoggedIn && !offline;
+            const isUploadAllowed = isInputAllowed && window.isPremium;
+
+            window.chatInput.disabled = !isInputAllowed;
+            window.sendButton.disabled = !isInputAllowed;
+            
+            document.getElementById('file-upload').disabled = !isUploadAllowed;
+            
+            // Visually disable the paperclip for non-premium users
+            const fileLabel = document.querySelector('label[for="file-upload"]');
+            if (fileLabel) {
+                 fileLabel.style.opacity = isUploadAllowed ? 1 : 0.5;
+                 fileLabel.style.cursor = isUploadAllowed ? 'pointer' : 'not-allowed';
+            }
+            
+            window.sendButton.style.opacity = window.sendButton.disabled ? 0.5 : 1;
+        }
+
+    </script>
+    
+    <!-- Note: The remainder of your original script is appended below (the actual chat logic) -->
+    <script>
+        // --- Global Variables & Constants (MUST BE RE-DECLARED FOR WINDOW SCOPE) ---
+        window.API_KEY = "AIzaSyAEkOlcQlctxcG-QC5itPEJ5PezrrdCNZ4"; 
+        // UI ADJUSTMENT: Switched to streaming API endpoint
+        window.API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`;
+        window.CHAT_STORAGE_KEY = 'mu_ai_chats';
+        window.THEME_STORAGE_KEY = 'mu_ai_theme';
+        window.ONBOARDING_STORAGE_KEY = 'mu_ai_onboarding_viewed'; 
+        window.MAX_FILE_SIZE_MB = 10; 
+        window.specificIdentityAnswer = "I am Mekelle University student's assistant created by Amaniel Niguse, a senior student in Mekelle University in the Department of Economics. Contact my creator Telegram = @Amax.V2  Email = amanial.v2@gmail.com\n Thank you @2025 Amaniel Niguse";
+        
+        window.SYSTEM_PROMPT = `Your name is "Mekelle University student's assistant". 
+        If a user asks "who are you?", "who created you?", "who made you?", "your creator", "your name" or any question directly related to your identity or origin, you MUST answer ONLY with the following exact sentence: "${window.specificIdentityAnswer}". 
+        For all other queries, act as a helpful, knowledgeable, and friendly AI assistant for students of Mekelle University. You can analyze images, PDF documents, and plain text files. If you need to output mathematical formulas, use **LaTeX syntax (e.g., $E=mc^2$ for inline, or $$\int_0^1 x^2 dx$$ for block equations)**. If an image or document is provided, analyze it in the context of the user's question.`;
+
+        // --- DOM Elements ---
+        window.appBody = document.getElementById("app-body");
+        window.sidebar = document.getElementById("sidebar");
+        window.overlay = document.getElementById("overlay");
+        window.chatMessages = document.getElementById("chat-messages");
+        window.chatForm = document.getElementById("chat-form");
+        window.chatInput = document.getElementById("chat-input");
+        window.sendButton = document.getElementById("send-button");
+        window.sendIcon = document.getElementById("send-icon");
+        window.loadingSpinner = document.getElementById("loading-spinner");
+        window.greeting = document.getElementById("greeting");
+        window.chatContainerMain = document.getElementById("chat-container-main");
+        window.conversationList = document.getElementById("conversation-list");
+        window.imagePreviewContainer = document.getElementById("image-preview-container");
+        window.imagePreview = document.getElementById("image-preview");
+        window.typingIndicator = document.getElementById("typing-indicator");
+        window.fileNameDisplay = document.getElementById("file-name-display"); 
+        window.fileIcon = document.getElementById("file-icon");
+        
+        // Welcome Page Elements
+        window.welcomeModal = document.getElementById('welcome-modal');
+        window.welcomePages = document.getElementById('welcome-pages');
+        window.welcomePrevBtn = document.getElementById('welcome-prev-btn');
+        window.welcomeNextBtn = document.getElementById('welcome-next-btn');
+        window.welcomeDotsContainer = document.getElementById('welcome-dots');
+        window.onboardingForm = document.getElementById('onboarding-form'); 
+        window.userNameInput = document.getElementById('user-name'); 
+        window.userIDInput = document.getElementById('user-id'); 
+
+
+        // --- State ---
+        window.chatHistory = [];
+        window.uploadedImageBase64 = null;
+        window.uploadedImageMimeType = null;
+        window.uploadedFileName = null; 
+        window.isLoading = false;
+        window.currentChatId = null;
+        window.currentPage = 0; 
+
+
+        // --- Welcome Modal Functions ---
+        window.showWelcomeModal = function() {
+            if (window.innerWidth <= 768 && window.sidebar.classList.contains('open')) {
+                window.toggleSidebar();
+            }
+            window.welcomeModal.classList.add('flex');
+            window.welcomeModal.classList.remove('hidden');
+            window.currentPage = 0;
+            document.getElementById('user-name').value = localStorage.getItem('mu_user_name') || '';
+            document.getElementById('user-id').value = localStorage.getItem('mu_user_muid') || '';
+            document.getElementById('onboarding-email-display').textContent = localStorage.getItem('mu_user_email') || 'N/A';
+            window.updateWelcomeUI();
+        }
+
+        window.hideWelcomeModal = function() {
+            window.welcomeModal.classList.add('hidden');
+            window.welcomeModal.classList.remove('flex');
+            localStorage.setItem(window.ONBOARDING_STORAGE_KEY, 'true');
+        }
+        
+        window.updateWelcomeUI = function() {
+            const totalPages = 4;
+            const offset = window.currentPage * 100;
+            
+            window.welcomePages.style.transform = `translateX(-${offset}%)`;
+
+            Array.from(window.welcomeDotsContainer.children).forEach((dot, index) => {
+                if (index === window.currentPage) {
+                    dot.classList.remove('bg-secondary/50');
+                    dot.classList.add('bg-primary');
+                } else {
+                    dot.classList.remove('bg-primary');
+                    dot.classList.add('bg-secondary/50');
+                }
+            });
+
+            window.welcomePrevBtn.disabled = window.currentPage === 0;
+            
+            const finalStartButton = document.querySelector('#welcome-modal .welcome-page:last-child button');
+
+            if (window.currentPage === totalPages - 1) {
+                window.welcomeNextBtn.classList.add('hidden');
+                if (finalStartButton) finalStartButton.classList.remove('hidden'); 
+            } else {
+                window.welcomeNextBtn.classList.remove('hidden');
+                if (finalStartButton) finalStartButton.classList.add('hidden'); 
+            }
+            
+            window.welcomeNextBtn.disabled = false;
+        }
+        
+        window.changeWelcomePage = function(direction) {
+            const totalPages = 4;
+            let newPage = window.currentPage + direction;
+
+            if (newPage >= 0 && newPage < totalPages) {
+                window.currentPage = newPage;
+                window.updateWelcomeUI();
+            } else if (newPage === totalPages) {
+                window.hideWelcomeModal(); 
+            }
+        }
+        
+        // --- Theme Functions ---
+        window.loadTheme = function() {
+            const savedTheme = localStorage.getItem(window.THEME_STORAGE_KEY) || 'mekelle';
+            window.applyTheme(savedTheme, false);
+        }
+
+        window.applyTheme = function(themeName, save = true) {
+            const themes = ['mekelle', 'futuristic', 'neodark', 'neolight', 'vibrant'];
+            
+            themes.forEach(t => window.appBody.classList.remove(`theme-${t}`));
+            
+            if (themes.includes(themeName)) {
+                window.appBody.classList.add(`theme-${themeName}`);
+            }
+
+            const opaqueInputBgMap = {
+                'mekelle': '#007FFF',
+                'futuristic': '#00F0FF',
+                'neodark': '#007FFF',
+                'neolight': '#E91E63',
+                'vibrant': '#6C5CE7'
+            };
+            document.documentElement.style.setProperty('--input-opaque-bg-color', opaqueInputBgMap[themeName] || '#007FFF');
+
+            if (save) {
+                localStorage.setItem(window.THEME_STORAGE_KEY, themeName);
+                window.closeThemeModal();
+            }
+        }
+
+        // --- Sidebar Toggles and Modals ---
+        window.toggleSidebar = function() {
+            window.sidebar.classList.toggle('open');
+            window.overlay.classList.toggle('hidden');
+        }
+
+        window.showAboutModal = function() {
+            if (window.innerWidth <= 768 && window.sidebar.classList.contains('open')) {
+                window.toggleSidebar();
+            }
+            document.getElementById('about-modal').classList.add('flex');
+            document.getElementById('about-modal').classList.remove('hidden');
+        }
+
+        window.closeAboutModal = function() {
+            document.getElementById('about-modal').classList.add('hidden');
+            document.getElementById('about-modal').classList.remove('flex');
+        }
+
+        window.showThemeModal = function() {
+            if (window.innerWidth <= 768 && window.sidebar.classList.contains('open')) {
+                window.toggleSidebar();
+            }
+            document.getElementById('theme-modal').classList.add('flex');
+            document.getElementById('theme-modal').classList.remove('hidden');
+        }
+
+        window.closeThemeModal = function() {
+            document.getElementById('theme-modal').classList.add('hidden');
+            document.getElementById('theme-modal').classList.remove('flex');
+        }
+
+        window.deleteSingleConversation = function(id) {
+            const conversations = window.getSavedConversations();
+            
+            if (conversations[id]) {
+                if (confirm(`Are you sure you want to delete the chat: "${conversations[id].title}"?`)) {
+                    delete conversations[id];
+                    
+                    try {
+                        localStorage.setItem(window.CHAT_STORAGE_KEY, JSON.stringify(conversations));
+                        
+                        if (id === window.currentChatId) {
+                            const remainingKeys = Object.keys(conversations).sort((a, b) => parseInt(b) - parseInt(a));
+                            if (remainingKeys.length > 0) {
+                                window.loadSpecificConversation(remainingKeys[0]);
+                            } else {
+                                window.startNewChat();
+                            }
+                        } else {
+                            window.renderConversationList();
+                        }
+                    } catch (e) {
+                        console.error("Error deleting conversation from local storage:", e);
+                        alert("Could not delete chat history due to a local storage error.");
+                    }
+                }
+            }
+            event.stopPropagation();
+        }
+
+
+        // --- Local Storage (Caching) Functions ---
+
+        window.getSavedConversations = function() {
+            try {
+                const data = localStorage.getItem(window.CHAT_STORAGE_KEY);
+                return data ? JSON.parse(data) : {};
+            } catch (e) {
+                console.error("Error loading conversations from local storage:", e);
+                return {};
+            }
+        }
+
+        window.saveCurrentConversation = function() {
+            if (!window.currentChatId || window.chatHistory.length === 0) return;
+
+            const conversations = window.getSavedConversations();
+            
+            let title = conversations[window.currentChatId]?.title;
+            if (!title) {
+                const firstUserMessage = window.chatHistory.find(msg => msg.role === 'user')?.parts.find(p => p.text)?.text || "New Chat";
+                title = firstUserMessage.substring(0, 30) + (firstUserMessage.length > 30 ? '...' : '');
+            }
+
+            conversations[window.currentChatId] = {
+                id: window.currentChatId,
+                title: title,
+                history: window.chatHistory
+            };
+            
+            try {
+                localStorage.setItem(window.CHAT_STORAGE_KEY, JSON.stringify(conversations));
+                window.renderConversationList(); 
+            } catch (e) {
+                console.error("Error saving conversation to local storage:", e);
+            }
+        }
+
+        window.startNewChat = function() {
+            window.saveCurrentConversation(); 
+            window.chatHistory = [];
+            window.currentChatId = Date.now().toString(); 
+            window.chatMessages.innerHTML = '';
+            
+            if (window.greeting) window.chatMessages.appendChild(window.greeting);
+            if (window.typingIndicator) window.chatMessages.appendChild(window.typingIndicator);
+            window.clearUploadedImage(false); 
+            
+            if (window.greeting) window.greeting.style.display = 'block';
+
+            window.renderConversationList(); 
+            if (window.innerWidth <= 768) {
+                window.toggleSidebar();
+            }
+        }
+
+        window.loadSpecificConversation = function(id) {
+            window.saveCurrentConversation(); 
+            const conversations = window.getSavedConversations();
+            const chat = conversations[id];
+
+            if (chat) {
+                window.currentChatId = id;
+                window.chatHistory = chat.history;
+                
+                window.chatMessages.innerHTML = '';
+                if (window.greeting) window.chatMessages.appendChild(window.greeting);
+                if (window.typingIndicator) window.chatMessages.appendChild(window.typingIndicator);
+                if (window.greeting) window.greeting.style.display = 'none';
+
+                window.chatHistory.forEach(msg => {
+                    const textPart = msg.parts.find(p => p.text)?.text || '';
+                    const imagePart = msg.parts.find(p => p.inlineData);
+                    
+                    let displayPrompt = textPart;
+                    if (imagePart) {
+                        displayPrompt = `${textPart} ${textPart ? ' ' : ''}[${imagePart.inlineData.mimeType.includes('image/') ? 'Image' : 'File'} Attached]`;
+                    }
+
+                    window.addMessageToUI(displayPrompt, msg.role, false, imagePart, false); // No streaming for past messages
+                });
+
+                window.clearUploadedImage(false); 
+                window.renderConversationList(); 
+                
+                setTimeout(() => window.chatContainerMain.scrollTop = window.chatContainerMain.scrollHeight, 100);
+                
+                if (window.innerWidth <= 768) {
+                    window.toggleSidebar();
+                }
+            }
+        }
+
+        window.renderConversationList = function() {
+            const conversations = window.getSavedConversations();
+            const conversationKeys = Object.keys(conversations).sort((a, b) => parseInt(b) - parseInt(a));
+
+            window.conversationList.innerHTML = ''; 
+
+            conversationKeys.forEach(id => {
+                const chat = conversations[id];
+                const isActive = id === window.currentChatId;
+                const listItem = document.createElement('li');
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.className = `p-2 rounded-lg cursor-pointer text-sm transition duration-150 flex justify-between items-center ${isActive ? 'conversation-active' : 'hover:bg-white/10 text-secondary'}`;
+                contentDiv.onclick = () => window.loadSpecificConversation(id);
+                
+                const titleSpan = document.createElement('span');
+                titleSpan.textContent = chat.title;
+                titleSpan.className = "truncate mr-2 flex-1";
+
+                const deleteButton = document.createElement('button');
+                deleteButton.className = "flex-shrink-0 text-secondary hover:text-red-500 p-1 rounded-full hover:bg-red-500/10 transition duration-150";
+                deleteButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6"/></svg>`;
+                deleteButton.title = `Delete "${chat.title}"`;
+                deleteButton.onclick = (e) => {
+                    e.stopPropagation();
+                    window.deleteSingleConversation(id);
+                };
+
+                contentDiv.appendChild(titleSpan);
+                contentDiv.appendChild(deleteButton);
+                listItem.appendChild(contentDiv);
+                window.conversationList.appendChild(listItem);
+            });
+        }
+        
+        // --- Image/File Upload Functions ---
+
+        window.handleFileUpload = function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const isImage = file.type.startsWith('image/');
+            const maxSize = window.MAX_FILE_SIZE_MB * 1024 * 1024;
+            
+            const allowedTypes = ['image/', 'application/pdf', 'text/plain'];
+            const isAllowedType = allowedTypes.some(type => file.type.startsWith(type));
+
+            if (!isAllowedType) {
+                console.error(`File type ${file.type} is not supported. Please use image, PDF, or plain text.`);
+                window.clearUploadedImage(false);
+                return;
+            }
+
+            if (file.size > maxSize) {
+                 console.error(`File size exceeds the ${window.MAX_FILE_SIZE_MB}MB limit.`);
+                 window.clearUploadedImage(false);
+                 return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                window.uploadedImageBase64 = e.target.result.split(',')[1];
+                window.uploadedImageMimeType = file.type;
+                window.uploadedFileName = file.name;
+
+                window.fileNameDisplay.textContent = `File Attached: ${window.uploadedFileName}`;
+                
+                if (isImage) {
+                    window.imagePreview.src = e.target.result;
+                    window.imagePreview.classList.remove('hidden');
+                    window.fileIcon.classList.add('hidden');
+                } else {
+                    window.imagePreview.classList.add('hidden');
+                    window.fileIcon.classList.remove('hidden');
+                    
+                    let iconPath = 'M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z'; 
+                    if (file.type.includes('pdf')) {
+                        iconPath = 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7l-5-5zM10 16.5c-.32 1.34-1.2 2-2.5 2-1.35 0-2.3-.6-2.5-2h-1c.2 1.9 1.7 3.5 3.5 3.5 1.78 0 3.2-1.2 3.5-3.5h-1zm5.5 0c-.32 1.34-1.2 2-2.5 2-1.35 0-2.3-.6-2.5-2h-1c.2 1.9 1.7 3.5 3.5 3.5 1.78 0 3.2-1.2 3.5-3.5h-1z'; 
+                    } else if (file.type.includes('text')) {
+                        iconPath = 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7l-5-5zM12 18H8m0-4h8'; 
+                    }
+                    window.fileIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${iconPath}"/><polyline points="14 2 14 8 20 8"/></svg>`;
+                }
+                
+                window.imagePreviewContainer.classList.remove('hidden');
+
+                window.sendButton.disabled = false;
+                window.sendButton.style.opacity = 1;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        window.clearUploadedImage = function(checkButtonState = true) {
+            window.uploadedImageBase64 = null;
+            window.uploadedImageMimeType = null;
+            window.uploadedFileName = null;
+            window.imagePreview.src = '';
+            document.getElementById("file-upload").value = ''; 
+            window.imagePreviewContainer.classList.add('hidden');
+            window.fileNameDisplay.textContent = 'File Attached: ';
+            window.fileIcon.innerHTML = ''; 
+
+            if (checkButtonState) {
+                window.sendButton.disabled = window.chatInput.value.trim() === '';
+                window.sendButton.style.opacity = window.chatInput.value.trim() === '' ? 0.5 : 1;
+            }
+        }
+
+        /**
+         * Handles the form submission (The actual chat sending logic)
+         */
+        window.handleSendMessage = async function(e) {
+            e.preventDefault();
+            
+            if (!window.isUserLoggedIn) {
+                alert('Please sign in to start chatting!');
+                document.getElementById('auth-modal').classList.add('flex');
+                document.getElementById('auth-modal').classList.remove('hidden');
+                return;
+            }
+
+            const prompt = window.chatInput.value.trim();
+
+            if (!prompt && !window.uploadedImageBase64 || window.isLoading) return;
+
+            if (window.greeting) window.greeting.style.display = 'none';
+
+            const userMessageParts = [];
+            let displayPrompt = prompt;
+            let filePartForDisplay = null;
+
+            if (window.uploadedImageBase64) {
+                filePartForDisplay = { inlineData: { mimeType: window.uploadedImageMimeType, data: window.uploadedImageBase64 } };
+
+                userMessageParts.push(filePartForDisplay);
+                userMessageParts.push({ text: prompt });
+                
+                const isImage = window.uploadedImageMimeType.startsWith('image/');
+                const fileTypeLabel = isImage ? 'Image' : window.uploadedFileName || 'File';
+                
+                displayPrompt = `${prompt} ${prompt ? ' ' : ''}[${fileTypeLabel} Attached]`;
+            } else {
+                userMessageParts.push({ text: prompt });
+            }
+
+            window.addMessageToUI(displayPrompt, 'user', false, filePartForDisplay, false);
+            
+            window.chatInput.value = "";
+            window.clearUploadedImage(false); 
+            window.sendButton.disabled = true;
+            window.sendButton.style.opacity = 0.5;
+
+            window.chatHistory.push({ role: "user", parts: userMessageParts });
+
+            window.setLoadingState(true);
+
+            // UI ADJUSTMENT: Streaming logic starts here
+            let modelResponseText = '';
+            const modelMessageElement = window.addMessageToUI('', 'model', false, null, true); // Create empty bubble for streaming
+            const messageTextElement = modelMessageElement.querySelector('.message-text');
+
+            try {
+                const payload = {
+                    contents: window.chatHistory,
+                    systemInstruction: {
+                        parts: [{ text: window.SYSTEM_PROMPT }]
+                    },
+                    // Tools might not be fully supported in streaming in all versions, but we include it.
+                    tools: [{ "google_search": {} }], 
+                };
+
+                const response = await fetch(window.API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`API error: ${response.status} ${response.statusText} - ${errorText}`);
+                }
+                
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+
+                while (true) {
+                    const { value, done } = await reader.read();
+                    if (done) break;
+
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split('\n');
+                    
+                    for (const line of lines) {
+                        if (line.trim().startsWith('"text":')) {
+                            try {
+                                const jsonText = '{' + line + '}'; // Create a valid JSON object
+                                const parsed = JSON.parse(jsonText);
+                                const textPart = parsed.text;
+                                if(textPart) {
+                                    modelResponseText += textPart;
+                                    messageTextElement.innerHTML = window.renderSimpleMarkdown(modelResponseText) + '<span class="blinking-cursor"></span>';
+                                    window.chatContainerMain.scrollTop = window.chatContainerMain.scrollHeight;
+                                }
+                            } catch (e) {
+                                // Ignore parsing errors which can happen with incomplete chunks
+                            }
+                        }
+                    }
+                }
+                
+                // Finalize the message
+                messageTextElement.innerHTML = window.renderSimpleMarkdown(modelResponseText);
+                if (typeof renderMathInElement === 'function') {
+                     renderMathInElement(messageTextElement.parentElement, {
+                        delimiters: [{ left: "$$", right: "$$", display: true }, { left: "$", right: "$", display: false }], throwOnError: false
+                    });
+                }
+                
+                window.chatHistory.push({ role: "model", parts: [{ text: modelResponseText }] });
+
+            } catch (error) {
+                console.error("Gemini API Call Error:", error);
+                let errorMessage = "Network Error: Please check your internet connection.";
+                if (error.message) {
+                    errorMessage = `Sorry, I encountered an error: ${error.message}.`;
+                }
+                messageTextElement.innerHTML = errorMessage;
+                messageTextElement.parentElement.classList.add('bg-red-800/20', 'border-red-500');
+            } finally {
+                window.setLoadingState(false);
+                window.sendButton.disabled = window.chatInput.value.trim() === '' && !window.uploadedImageBase64;
+                window.sendButton.style.opacity = window.sendButton.disabled ? 0.5 : 1;
+                
+                window.saveCurrentConversation();
+            }
+        }
+
+        window.addMessageToUI = function(text, role, isError = false, imagePart = null, isStreaming = false) {
+            const messageDiv = document.createElement('div');
+            // UI ADJUSTMENT: Removed icon-related layout classes
+            messageDiv.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'} w-full`;
+            
+            let bubbleClasses = '';
+            if (role === 'user') {
+                bubbleClasses = 'rounded-bl-xl rounded-tl-xl rounded-tr-3xl user-bubble user-bubble-effect'; 
+            } else {
+                bubbleClasses = `glass model-bubble rounded-br-xl rounded-tr-xl rounded-tl-3xl ${isError ? 'bg-red-800/20 border-red-500' : ''}`;
+            }
+            
+            let contentHTML = '';
+            if (imagePart && imagePart.inlineData && imagePart.inlineData.data) {
+                // ... (image rendering logic remains the same)
+                 const mimeType = imagePart.inlineData.mimeType || '';
+                const imgSource = imagePart.inlineData.data.startsWith('data:') ? imagePart.inlineData.data : `data:${mimeType};base64,${imagePart.inlineData.data}`;
+                
+                if (mimeType.startsWith('image/')) {
+                    contentHTML += `<img src="${imgSource}" class="w-full max-h-60 object-contain rounded-xl mb-2 border border-white/20" alt="Uploaded Image" />`;
+                } else {
+                    let fileLabel = mimeType.split('/')[1] || 'File';
+                    if (mimeType.includes('pdf')) fileLabel = 'PDF';
+                    else if (mimeType.includes('text')) fileLabel = 'TXT';
+                    
+                    contentHTML += `
+                        <div class="flex items-center space-x-2 p-2 border border-white/20 rounded-lg mb-2 bg-white/10">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                            </svg>
+                            <span class="text-sm font-medium">${fileLabel} Attached}</span>
+                        </div>
+                    `;
+                }
+            }
+
+            // UI ADJUSTMENT: Add blinking cursor for streaming
+            const streamCursor = isStreaming ? '<span class="blinking-cursor"></span>' : '';
+            contentHTML += `<div class="message-text">${window.renderSimpleMarkdown(text)}${streamCursor}</div>`;
+
+            // UI ADJUSTMENT: Simplified innerHTML without icons
+            messageDiv.innerHTML = `
+                <div class="p-4 ${bubbleClasses} message-content w-fit max-w-full overflow-hidden">
+                    ${contentHTML}
+                </div>
+            `;
+            
+            const bubbleElement = messageDiv.firstElementChild;
+            window.chatMessages.insertBefore(messageDiv, window.typingIndicator);
+
+            if (role === 'model' && !isStreaming && typeof renderMathInElement === 'function') {
+                 renderMathInElement(bubbleElement, {
+                    delimiters: [{ left: "$$", right: "$$", display: true }, { left: "$", right: "$", display: false }], throwOnError: false
+                });
+            }
+
+            setTimeout(() => {
+                window.chatContainerMain.scrollTop = window.chatContainerMain.scrollHeight;
+            }, 50); 
+
+            return bubbleElement; // Return the bubble element for streaming updates
+        }
+
+        window.renderSimpleMarkdown = function(text) {
+            let escapedText = text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+            
+            escapedText = escapedText
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>');
+            
+            const tableRegex = /((?:\|.*?\|.*?[\r\n])+)/g;
+            
+            escapedText = escapedText.replace(tableRegex, (match) => {
+                let html = '<div class="markdown-table-wrapper"><table class="message-table"><tbody>';
+                const rows = match.trim().split(/[\r\n]+/).filter(line => line.trim().startsWith('|'));
+                
+                rows.forEach((row, rowIndex) => {
+                    const cells = row.replace(/^\||\|$/g, '').split('|').map(c => c.trim());
+
+                    if (rowIndex === 1 && cells.every(c => c.match(/^-+$/) || c === '')) {
+                        return;
+                    }
+
+                    html += '<tr>';
+                    cells.forEach((cell, cellIndex) => {
+                        if (rowIndex === 0) {
+                            html += `<th>${cell}</th>`;
+                        } else {
+                            html += `<td>${cell}</td>`;
+                        }
+                    });
+                    html += '</tr>';
+                });
+                
+                html += '</tbody></table></div>';
+                return html;
+            });
+            
+            return escapedText.replace(/\n/g, '<br>');
+        }
+
+        window.setLoadingState = function(loading) {
+            window.isLoading = loading;
+            if (loading) {
+                // The old typing indicator is no longer needed for streaming, but we keep the logic for buttons
+                // window.typingIndicator.classList.remove('hidden');
+                
+                window.sendButton.disabled = true;
+                window.sendButton.style.opacity = 0.5;
+                window.sendIcon.classList.add('hidden'); 
+                window.loadingSpinner.classList.remove('hidden'); 
+                window.chatInput.disabled = true;
+                document.getElementById('file-upload').disabled = true;
+
+                setTimeout(() => window.chatContainerMain.scrollTop = window.chatContainerMain.scrollHeight, 100);
+            } else {
+                // window.typingIndicator.classList.add('hidden');
+
+                window.chatInput.disabled = false;
+                document.getElementById('file-upload').disabled = false;
+                
+                window.sendButton.disabled = window.chatInput.value.trim() === '' && !window.uploadedImageBase64;
+                window.sendButton.style.opacity = window.sendButton.disabled ? 0.5 : 1;
+                window.sendIcon.classList.remove('hidden'); 
+                window.loadingSpinner.classList.add('hidden'); 
+            }
+        }
+
+
+        // --- Initialization and Event Wiring ---
+
+        window.init = function() {
+            // Event Listeners for Chat Form (moved to the global scope)
+            window.chatForm.addEventListener("submit", window.handleSendMessage);
+            window.chatInput.addEventListener("input", () => {
+                window.sendButton.disabled = (window.chatInput.value.trim() === '' && !window.uploadedImageBase64) || window.isLoading;
+                window.sendButton.style.opacity = window.sendButton.disabled ? 0.5 : 1;
+            });
+            
+            // Default auth mode to 'signin' on load
+            window.toggleAuthMode(null, 'signup');
+            
+            // Initial button state
+            window.sendButton.disabled = true;
+            window.sendButton.style.opacity = 0.5;
+            
+            // Initializing onboarding UI
+            window.updateWelcomeUI();
+        }
+        
+        // Save the original handleFileUpload before the Firebase module overrides it with the premium guard.
+        window.__original_handleFileUpload = window.handleFileUpload;
+
+        // Start the application setup
+        window.onload = window.init;
+        
+    </script>
+</body>
+</html>
